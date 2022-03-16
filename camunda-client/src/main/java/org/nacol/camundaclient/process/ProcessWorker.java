@@ -1,33 +1,25 @@
-package org.nacol.camundaserver;
+package org.nacol.camundaclient.process;
 
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.ExternalTaskService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.externaltask.LockedExternalTask;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Log4j2
-@SpringBootApplication
-public class CamundaServerApplication {
+public class ProcessWorker {
 
     private static final String WORKER_ID = "externalWorkerId";
 
-    public static void main(String[] args) {
-        SpringApplication.run(CamundaServerApplication.class, args);
-        cunsumer();
-    }
-
-    public static void cunsumer() {
+    public void cunsumer() {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         ExternalTaskService externalTaskService = processEngine.getExternalTaskService();
         List<LockedExternalTask> tasks = externalTaskService.fetchAndLock(10, WORKER_ID)
-                .topic("topic-nacol", 60L * 1000L)
+                .topic("AddressValidation", 60L * 1000L)
                 .execute();
 
         for (LockedExternalTask task : tasks) {
@@ -57,4 +49,5 @@ public class CamundaServerApplication {
             }
         }
     }
+
 }

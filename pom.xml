@@ -22,6 +22,8 @@
         <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
         <mysql-connector.version>5.1.49</mysql-connector.version>
         <fastjson.version>1.2.31</fastjson.version>
+
+        <camunda-spin.version>1.6.6</camunda-spin.version>
     </properties>
 
     <dependencyManagement>
@@ -31,10 +33,23 @@
                 <artifactId>camunda-external-task-client</artifactId>
                 <version>1.2.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.camunda.spin</groupId>
+                <artifactId>camunda-spin-dataformat-all</artifactId>
+                <version>${camunda-spin.version}</version>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <dependencies>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- DB -->
         <dependency>
             <groupId>mysql</groupId>
