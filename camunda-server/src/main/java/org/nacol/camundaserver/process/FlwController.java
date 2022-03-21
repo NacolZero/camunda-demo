@@ -1,6 +1,8 @@
 package org.nacol.camundaserver.process;
 
 import com.alibaba.fastjson.JSONObject;
+import commons.Page;
+import commons.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
@@ -11,17 +13,13 @@ import org.camunda.bpm.engine.rest.dto.task.TaskDto;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.task.TaskQuery;
-import org.nacol.camundaserver.config.Page;
-import org.nacol.camundaserver.config.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RequestMapping("/flw")
 @RestController
 public class FlwController {

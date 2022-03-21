@@ -1,9 +1,6 @@
-package org.nacol.camundaserver.config;
+package commons;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import java.io.Serializable;
 
 public class Result<T> implements Serializable{
@@ -12,14 +9,14 @@ public class Result<T> implements Serializable{
     /**
      * 状态码
      */
-    private String status;
+    private String code;
 
     /**
      * 获取状态。
      * @return 状态
      */
-    public String getStatus() {
-        return status;
+    public String getCode() {
+        return code;
     }
 
     /**
@@ -35,38 +32,15 @@ public class Result<T> implements Serializable{
         return message;
     }
 
-    public Long rowCount;
-
-    /**
-     * 数据总条数
-     * @return 消息
-     */
-    public Long getRowCount() {
-        return rowCount;
-    }
-
     /**
      * 数据.
      */
     private T data;
 
     /**
-     * 标记
-     * */
-    private Boolean flag;
-
-    /**
      * 前端请求的requestFlag 参数
      */
     private String requestFlag;
-
-    public String getRequestFlag() {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (attributes == null) {
-            return null;
-        }
-        return attributes.getRequest().getHeader("requestFlag");
-    }
 
     /**
      * 获取数据内容。
@@ -76,39 +50,17 @@ public class Result<T> implements Serializable{
         return data;
     }
 
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public Result setFlag(Boolean flag) {
-        this.flag = flag;
-        return this;
-    }
-
     public Result() {
     }
 
-    private Result(String status, String message, Long rowCount, T data) {
-        this.status = status;
-        this.message = message;
-        this.rowCount = rowCount;
-        this.data = data;
-    }
-
-    private Result(String status, String message, T data) {
-        this.status = status;
+    private Result(String code, String message, T data) {
+        this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    private Result(String status, long rowCount, T data){
-        this.status = status;
-        this.rowCount = rowCount;
-        this.data = data;
-    }
-
-    private Result(String status, String message) {
-        this.status = status;
+    private Result(String code, String message) {
+        this.code = code;
         this.message = message;
     }
 
@@ -116,45 +68,15 @@ public class Result<T> implements Serializable{
         this.message = message;
     }
 
-    public Result createResultInfo(String message,Boolean flag,String status) {
-        return createResultInfo(null, message, flag, status);
-    }
-
-    public Result createResultInfo(String message, Boolean flag) {
-        String status = "";
-        if (null != flag) {
-            if (flag) {
-                status = "200";
-            } else {
-                status = "500";
-            }
-        }
-        return createResultInfo(message, flag, status);
-    }
-
-    public Result createResultInfo(T data,String message,Boolean flag,String status) {
+    public Result createResultInfo(T data,String message,String status) {
         this.data = data;
         this.message = message;
-        this.flag = flag;
-        this.status = status;
+        this.code = status;
         return this;
     }
 
-
-
     /**
      * 创建一个带有<b>状态</b>、<b>消息</b>、<b>数据总条数</b>和<b>数据</b>的结果对象.
-     * @param status 状态
-     * @param message 消息内容
-     * @param data 数据
-     * @return 结构数据
-     */
-    public static <T> Result<T> buildResult(Status status, String message,Long rowCount, T data) {
-        return new Result<T>(status.getCode(), message,rowCount, data);
-    }
-
-    /**
-     * 创建一个带有<b>状态</b>、<b>消息</b>和<b>数据</b>的结果对象.
      * @param status 状态
      * @param message 消息内容
      * @param data 数据
@@ -207,14 +129,6 @@ public class Result<T> implements Serializable{
 
     public static <T> Result<T> buildResultSuccess(String message,T data){
         return new Result<T>(Status.OK.getCode(),message,data);
-    }
-
-    public static <T> Result<T> buildResultSuccess(long total,T data){
-        return new Result<T>(Status.OK.getCode(),total,data);
-    }
-
-    public static <T> Result<T> buildResultSuccess(String message,long total,T data){
-        return new Result<T>(Status.OK.getCode(),message,total,data);
     }
 
     public static <T> Result<T> buildResultError(){

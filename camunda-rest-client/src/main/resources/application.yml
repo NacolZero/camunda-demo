@@ -1,13 +1,17 @@
 camunda:
-  engine-url: http://localhost:8866/engine-rest
+  bpm:
+    client:
+      base-url: http://localhost:8866/engine-rest
+
+# camunda.bpm.client.base-url: http://localhost:8866/engine-rest
 server:
-  port: 6688
+  port: 8484
   tomcat:
     uri-encoding: UTF-8
 
 spring:
   application:
-    name: camunda-client
+    name: camunda-rest-client
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/camunda_server?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&useOldAliasMetadataBehavior=true

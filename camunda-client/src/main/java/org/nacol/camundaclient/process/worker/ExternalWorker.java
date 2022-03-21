@@ -1,4 +1,4 @@
-package org.nacol.camundaclient.process;
+package org.nacol.camundaclient.process.worker;
 
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.client.ExternalTaskClient;
@@ -26,11 +26,14 @@ public class ExternalWorker {
         externalTaskClient.subscribe("topic-nacol")
                 .lockDuration(30000)
                 .handler((externalTask, externalTaskService) -> {
-                    // Put your business logic here
-
                     // Get a process variable
 //                    String item = (String) externalTask.getVariable("item");
 //                    Long amount = (Long) externalTask.getVariable("amount");
+
+                    // business logic
+
+
+
 
                     // Complete the task
                     log.info("---------------complete external task : {}", externalTask.getId());

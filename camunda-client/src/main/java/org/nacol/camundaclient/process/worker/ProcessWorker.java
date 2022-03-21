@@ -1,4 +1,4 @@
-package org.nacol.camundaclient.process;
+package org.nacol.camundaclient.process.worker;
 
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.ExternalTaskService;

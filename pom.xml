@@ -5,13 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+<!--        <version>2.5.4</version>-->
         <version>2.1.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.nacol</groupId>
-    <artifactId>camunda-demo</artifactId>
+    <artifactId>ijep-scrcc-bpm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>camunda-demo</name>
+    <name>ijep-scrcc-bpm</name>
     <description>Demo project for Camunda</description>
 
     <properties>

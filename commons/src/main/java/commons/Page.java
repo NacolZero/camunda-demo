@@ -1,15 +1,10 @@
-package org.nacol.camundaserver.config;
+package commons;
 
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Author: zhshuo
- * Time : 2019/1/14 13:49 星期一
- * Desc:
- **/
 @Data
 public class Page<T, R> implements Serializable {
 
@@ -31,5 +26,9 @@ public class Page<T, R> implements Serializable {
 
     public T filter(){
         return filter;
+    }
+
+    public int getPageNumber() {
+        return this.pageNumber - 1;
     }
 }
